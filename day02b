@@ -1,0 +1,44 @@
+import copy
+
+def checkReportValid(report, increasing, problems = 0):
+    reportCopy = copy.deepcopy(report)
+    i = 0
+    while i < len(reportCopy):
+        if i == 0: 
+            i += 1
+            continue
+        if problems > 1: break
+        difference = int(reportCopy[i]) - int(reportCopy[i-1])
+        if difference * increasing < 0:
+            problems += 1
+            reportCopy.pop(i)
+            i -= 1
+        elif abs(difference) < 1 or abs(difference) > 3:
+            problems += 1
+            reportCopy.pop(i)
+            i -= 1
+        i += 1
+    if problems < 2:
+        return True
+    else:
+        return False
+
+reports = []
+userIN = input()
+while userIN != '-1':
+    reports.append(userIN.split(' '))
+    userIN = input()
+
+safe = 0
+for report in reports:
+    if checkReportValid(report, 1):
+        safe += 1
+    elif checkReportValid(report, -1):
+        safe += 1
+    elif checkReportValid(report[1::], 1, 1):
+        safe += 1
+    elif checkReportValid(report[1::], -1, 1):
+        safe += 1
+
+print(safe)
+
