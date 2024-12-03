@@ -1,0 +1,24 @@
+lists = []
+userIN = input()
+while userIN != '-1':
+    lists.append(userIN)
+    userIN = input()
+list1 = []
+list2 = []
+for row in lists:
+    values = row.split("   ")
+    list1.append(int(values[0]))
+    list2.append(int(values[1]))
+
+countHashMap = {}
+for i in range(100000):
+    countHashMap[i] = 0
+
+for i in list2:
+    countHashMap[i] += 1
+
+simScore = 0
+for i in list1:
+    simScore += i * countHashMap[i]
+
+print(simScore)
