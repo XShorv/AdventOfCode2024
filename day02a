@@ -1,0 +1,29 @@
+reports = []
+userIN = input()
+while userIN != '-1':
+    reports.append(userIN.split(' '))
+    userIN = input()
+
+safe = 0
+for report in reports:
+    if int(report[0]) > int(report[1]):
+        increasing = -1
+    elif int(report[0]) < int(report[1]):
+        increasing = 1
+    else:
+        continue
+
+    thisReportSafe = True
+    for i in range(len(report)):
+        if i == 0: continue
+        if not thisReportSafe: break
+        difference = int(report[i]) - int(report[i-1])
+        if difference * increasing < 0:
+            thisReportSafe = False
+        elif abs(difference) < 1 or abs(difference) > 3:
+            thisReportSafe = False
+    
+    if thisReportSafe:
+        safe += 1
+print(safe)
+
