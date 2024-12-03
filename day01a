@@ -1,0 +1,29 @@
+def MIN(arr):
+    minValIndex = 0
+    for i in range(len(arr)):
+        if arr[minValIndex] > arr[i]:
+            minValIndex = i
+
+    minVal = arr.pop(minValIndex)
+    return minVal
+
+
+lists = []
+userIN = input()
+while userIN != '-1':
+    lists.append(userIN)
+    userIN = input()
+list1 = []
+list2 = []
+for row in lists:
+    values = row.split("   ")
+    list1.append(int(values[0]))
+    list2.append(int(values[1]))
+
+sum = 0
+for i in range(len(list1)):
+    min1 = MIN(list1)
+    min2 = MIN(list2)
+    sum += abs(min1 - min2)
+
+print(sum)
